@@ -8,7 +8,7 @@ class App extends Component {
     this.state = {
       visible: false,
       data: [],
-      searchId: document.getElementById('button-search')
+      searchId: undefined
     }
 
     this.handleClick = (e) => {
@@ -23,8 +23,16 @@ class App extends Component {
         });
     }
 
+    this.handleChange = (e) => {
+      this.setState({
+        searchId: parseInt(e.target.value)
+
+      })
+    }
+
+
     this.buscar = (e) => {
-      return e.userId === parseInt(document.getElementById('searchId').value)
+      return e.userId === this.state.searchId
 
     }
 
@@ -52,7 +60,7 @@ class App extends Component {
           <div className="col-3"></div>
           <div className="col-6 mt-5">
             <div className="input-group mb-3">
-              <input id="searchId" type="number" className="form-control" placeholder="Enter user id..." aria-label="Enter user id..." aria-describedby="button-addon2"></input>
+              <input onChange={this.handleChange} id="searchId" type="number" className="form-control" placeholder="Enter user id..." aria-label="Enter user id..." aria-describedby="button-addon2"></input>
               <div className="input-group-append">
                 <button onClick={this.handleSearch} className="btn btn-outline-secondary" type="button" id="button-search">Search by userId</button>
               </div>
